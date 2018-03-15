@@ -1,6 +1,6 @@
 # lib-audio-mad
 
-Interface to the libmad library.
+Interface to the libmad (MP3 decoding) library.
 
 ## Dependencies
 
@@ -32,10 +32,19 @@ On Ubuntu distributions;
         'debug'         => 1
     );
 
+    use FileHandle;
+    my $sox = FileHandle -> new( sprintf
+            "| sox -q -t raw -b 16 -e s -r %d -c %d - -t pulseaudio",
+            $mp3 -> get_samplerate(),
+            $mp3 -> is_stereo() ? 2 : 1
+    ) or die $!;
+    binmode $sox;
+
     while ( $mp3 -> read_frame() ) {
         $buff_in .= $MP3_FRAME;
         $mad -> decode()
-            and printf "decoded %d bytes\n", length( $buff_out );
+            and $sox -> print( $buff_out );
     }
     $mad -> decode( 1 )
-        and printf "decoded %d final bytes\n", length( $buff_out );
+        and $sox -> print( $buff_out );
+    $sox -> close();
