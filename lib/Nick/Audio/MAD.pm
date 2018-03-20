@@ -6,8 +6,6 @@ use warnings;
 use XSLoader;
 use Carp;
 
-# sudo apt install libmad0-dev
-
 our $VERSION;
 
 BEGIN {
