@@ -48,3 +48,43 @@ On Ubuntu distributions;
     $mad -> decode( 1 )
         and $sox -> print( $buff_out );
     $sox -> close();
+
+## Methods
+
+### new()
+
+Instantiates a new Nick::Audio::MAD object.
+
+All arguments are optional.
+
+- buffer\_in
+
+    Scalar that'll be used to pull MP3 frames from.
+
+- buffer\_out
+
+    Scalar that'll be used to push decoded PCM to.
+
+- channels
+
+    How many audio channels the stream has.
+
+- gain
+
+    Decibels of gain to apply to the decoded PCM.
+
+- debug
+
+    Whether verbose decoding info will be written to STDERR.
+
+### decode()
+
+Decodes the frame (if present) in the buffer\_in scalar, returning number of bytes of PCM written to buffer\_out.
+
+If the argument is 1, any buffers will be flushed.
+
+    $buff_in .= $MP3_FRAME;
+    $read = $mad -> decode()
+        or next;
+    printf "decoded %d bytes\n", $read;
+    # do something with buffer_out
