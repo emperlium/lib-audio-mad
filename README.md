@@ -77,6 +77,14 @@ All arguments are optional.
 
     Whether verbose decoding info will be written to STDERR.
 
+### set\_buffer\_in\_ref()
+
+Sets the scalar that'll be used to pull MP3 frames from.
+
+### set\_buffer\_out\_ref()
+
+Sets the scalar that'll be used to push decoded PCM to.
+
 ### decode()
 
 Decodes the frame (if present) in the buffer\_in scalar, returning number of bytes of PCM written to buffer\_out.

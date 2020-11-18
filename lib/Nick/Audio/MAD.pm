@@ -84,6 +84,14 @@ Whether verbose decoding info will be written to STDERR.
 
 =back
 
+=head2 set_buffer_in_ref()
+
+Sets the scalar that'll be used to pull MP3 frames from.
+
+=head2 set_buffer_out_ref()
+
+Sets the scalar that'll be used to push decoded PCM to.
+
 =head2 decode()
 
 Decodes the frame (if present) in the buffer_in scalar, returning number of bytes of PCM written to buffer_out.

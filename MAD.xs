@@ -86,6 +86,28 @@ NICKAUDIOMAD::DESTROY()
         Safefree( THIS -> pcm_out );
         Safefree( THIS );
 
+void
+NICKAUDIOMAD::set_buffer_in_ref( scalar_in )
+        SV *scalar_in;
+    CODE:
+        SvREFCNT_dec( THIS -> scalar_in );
+        THIS -> scalar_in = SvREFCNT_inc(
+            SvROK( scalar_in )
+            ? SvRV( scalar_in )
+            : scalar_in
+        );
+
+void
+NICKAUDIOMAD::set_buffer_out_ref( scalar_out )
+        SV *scalar_out;
+    CODE:
+        SvREFCNT_dec( THIS -> scalar_out );
+        THIS -> scalar_out = SvREFCNT_inc(
+            SvROK( scalar_out )
+            ? SvRV( scalar_out )
+            : scalar_out
+        );
+
 int
 NICKAUDIOMAD::decode( flush=false )
         bool flush;
