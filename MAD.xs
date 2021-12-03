@@ -121,7 +121,7 @@ NICKAUDIOMAD::decode( flush=false )
         STRLEN len_in;
         unsigned char *in_buff = SvPV( THIS -> scalar_in, len_in );
         if ( len_in > MAX_BUFFER ) {
-            croak( "MAD decode buffer too big: %d", len_in );
+            croak( "MAD decode buffer too big: %lu", len_in );
         }
         if ( flush ) {
             SvGROW( THIS -> scalar_in, len_in + MAD_BUFFER_GUARD );
